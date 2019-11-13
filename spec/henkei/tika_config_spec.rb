@@ -34,12 +34,12 @@ describe Henkei::TikaConfig do
   context 'when configured with Henkei.configure' do
     describe 'with pdf_config override' do
       before do
-        Henkei.configure({
+        Henkei.configure(
           pdf_defaults: :inline,
           pdf_config: {
             ocrDPI: 100
           }
-        })
+        )
       end
 
       it 'writes overwritten config' do
@@ -48,13 +48,13 @@ describe Henkei::TikaConfig do
       end
 
       after do
-        Henkei.configure({ pdf_defaults: :none })
+        Henkei.configure(pdf_defaults: :none)
       end
     end
 
     describe 'without pdf_config override' do
       before do
-        Henkei.configure({ pdf_defaults: :inline })
+        Henkei.configure(pdf_defaults: :inline)
       end
 
       it 'writes standard config' do
@@ -63,7 +63,7 @@ describe Henkei::TikaConfig do
       end
 
       after do
-        Henkei.configure({ pdf_defaults: :none })
+        Henkei.configure(pdf_defaults: :none)
       end
     end
 

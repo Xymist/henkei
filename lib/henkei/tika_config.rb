@@ -3,18 +3,21 @@
 require 'ox'
 
 class Henkei
+  # Helper class to define and write out the configuration file to be passed
+  # to Tika on start. This will overwrite the default config file when .write!
+  # is called.
   class TikaConfig
     INLINE_PDF_CONFIG = {
       allowExtractionForAccessibility: true,
       extractInlineImages: true
-    }
+    }.freeze
 
     RENDERED_PDF_CONFIG = {
       allowExtractionForAccessibility: true,
       ocrStrategy: 'ocr_only',
       ocrImageType: 'grey',
       ocrDPI: 300
-    }
+    }.freeze
 
     def initialize(pdf_defaults: :none, pdf_config: {})
       @tika_config = base_config
@@ -28,9 +31,7 @@ class Henkei
 
       @pdf_config.merge!(pdf_config)
 
-      if pdf_defaults != :none
-        insert_pdf_configuration
-      end
+      insert_pdf_configuration if pdf_defaults != :none
     end
 
     def insert_pdf_configuration
