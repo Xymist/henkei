@@ -93,7 +93,22 @@ henkei.mimetype.extensions #=> ['docx']
 ### Java Runtime
 
 Henkei packages the Apache Tika application jar and requires a working JRE for it to work.
-Check that you either have the `JAVA_HOME` environment variable set, or that `java` is in your path. 
+Check that you either have the `JAVA_HOME` environment variable set, or that `java` is in your path.
+
+### Tesseract
+
+If you need OCR capabilities, Apache Tika can make use of Tesseract if it is available on your
+system. Configuration for OCR of images in PDFs, e.g. for scanned documents, can be provided
+via `Henkei.configure`:
+
+```ruby
+Henkei.configure({
+  pdf_defaults: :inline, # or :rendered
+  pdf_config: {
+    ocrDPI: 100
+  }
+})
+```
 
 ### Gem
 
@@ -108,7 +123,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install henkei
-    
+
 ### Heroku
 
 Add the JVM Buildpack to your Heroku project:
