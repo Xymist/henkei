@@ -20,16 +20,16 @@ class Henkei
     }.freeze
 
     def initialize(pdf_defaults: :none, pdf_config: {})
-      @tika_config = base_config
+      @tika_config = xml_config_wrapper
 
-      @pdf_config =
+      base_config =
         case pdf_defaults
         when :inline then INLINE_PDF_CONFIG
         when :rendered then RENDERED_PDF_CONFIG
         else {}
         end
 
-      @pdf_config.merge!(pdf_config)
+      @pdf_config = base_config.merge(pdf_config)
 
       insert_pdf_configuration if pdf_defaults != :none
     end
@@ -91,7 +91,7 @@ class Henkei
       end
     end
 
-    def base_config
+    def xml_config_wrapper
       wrapper = Ox::Document.new(version: '1.0')
       properties = Ox::Element.new('properties')
       service_loader = Ox::Element.new('service-loader')
