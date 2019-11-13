@@ -1,0 +1,15 @@
+<properties>
+  <service-loader initializableProblemHandler="ignore"/>
+  <parsers>
+    <parser class="org.apache.tika.parser.DefaultParser">
+      <parser-exclude class="org.apache.tika.parser.pdf.PDFParser"/>
+    </parser>
+    <parser class="org.apache.tika.parser.pdf.PDFParser">
+      <params>
+        <param name="allowExtractionForAccessibility" type="bool">true</param>
+        <param name="extractInlineImages" type="bool">true</param>
+        <param name="ocrDPI" type="int">100</param>
+      </params>
+    </parser>
+  </parsers>
+</properties>

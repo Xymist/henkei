@@ -38,6 +38,26 @@ class Henkei # rubocop:disable Metrics/ClassLength
     end
   end
 
+  # Add configuration details.
+  # This is mostly useful if Tesseract is available and Tika can use it
+  # to process PDFs and images in them.
+  def self.configure(config)
+    unless config.is_a?(Hash)
+      raise TypeError,
+            %{
+              Henkei/Tika configuration ought to be a Hash. Example:
+              Henkei.configure({
+                pdf_defaults: :inline,
+                pdf_config: {
+                  ocrDPI: 100
+                }
+              })
+            }
+    end
+
+    TikaConfig.new(config).write!
+  end
+
   # Create a new instance of Henkei with a given document.
   #
   # Using a file path:

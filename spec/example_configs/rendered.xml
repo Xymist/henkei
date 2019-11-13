@@ -1,0 +1,16 @@
+<properties>
+  <service-loader initializableProblemHandler="ignore"/>
+  <parsers>
+    <parser class="org.apache.tika.parser.DefaultParser">
+      <parser-exclude class="org.apache.tika.parser.pdf.PDFParser"/>
+    </parser>
+    <parser class="org.apache.tika.parser.pdf.PDFParser">
+      <params>
+        <param name="allowExtractionForAccessibility" type="bool">true</param>
+        <param name="ocrStrategy" type="string">ocr_only</param>
+        <param name="ocrImageType" type="string">grey</param>
+        <param name="ocrDPI" type="int">300</param>
+      </params>
+    </parser>
+  </parsers>
+</properties>
